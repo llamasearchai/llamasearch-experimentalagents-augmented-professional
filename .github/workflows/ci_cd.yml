@@ -1,0 +1,87 @@
+name: CI/CD for Llamasearch ExperimentalAgents
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  test_and_lint:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.11', '3.12']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install with dev dependencies, plus platform specific if needed
+        python -m pip install -e ".[dev,mlx]"  # Example: Install mlx on all for now, adjust if needed
+        python -m pip install -e ".[jax]"
+
+    - name: Lint with Ruff
+      run: python -m ruff check src tests
+
+    - name: Check formatting with Black
+      run: python -m black --check src tests
+
+    - name: Type check with MyPy
+      run: python -m mypy src # Adjust path if needed
+
+    - name: Test with pytest
+      run: python -m pytest
+
+  # Optional: Job to build and publish docs to GitHub Pages
+  # deploy_docs:
+  #   needs: test_and_lint
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
+  #       cache: 'pip'
+  #   - name: Install docs dependencies
+  #     run: python -m pip install -e ".[docs]"
+  #   - name: Build and deploy docs
+  #     run: mkdocs gh-deploy --force
+
+  # Optional: Job to build wheels and publish to PyPI on tag push
+  # publish_pypi:
+  #   needs: test_and_lint
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+  #   permissions:
+  #     id-token: write # For trusted publishing
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
+  #   - name: Install build dependencies
+  #     run: python -m pip install build maturin
+  #   - name: Build wheels
+  #     run: python -m build
+      # For Rust extensions with Maturin:
+      # run: maturin build --release --out dist --find-interpreter
+  #   - name: Publish package distributions to PyPI
+  #     uses: pypa/gh-action-pypi-publish@release/v1 

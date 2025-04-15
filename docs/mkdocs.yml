@@ -1,0 +1,74 @@
+site_name: Llamasearch ExperimentalAgents - [Project Name]
+site_url: https://nikjois.github.io/llamasearch-experimentalagents-augmented-professional/ # Replace with actual URL
+site_author: Nik Jois
+site_description: >-
+  AI knowledge democratization engine for professionals.
+
+# Repository
+repo_name: nikjois/llamasearch-experimentalagents-augmented-professional # Replace with actual repo
+repo_url: https://github.com/nikjois/llamasearch-experimentalagents-augmented-professional # Replace with actual repo
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024 Nik Jois / Llamasearch ExperimentalAgents
+
+# Theme
+theme:
+  name: material
+  logo: assets/logo.png # Add logo later
+  favicon: assets/favicon.png # Add favicon later
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: blue grey
+      accent: indigo
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: blue grey
+      accent: indigo
+
+# Plugins
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_root_heading: true
+            show_source: false
+
+# Markdown extensions
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+
+# Navigation
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - Agents: agents.md
+  - GUI: gui.md
+  - Development: development.md
+  - API Reference: api.md 

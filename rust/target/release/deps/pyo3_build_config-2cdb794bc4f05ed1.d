@@ -1,0 +1,14 @@
+/Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/deps/libpyo3_build_config-2cdb794bc4f05ed1.rmeta: /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/lib.rs /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/errors.rs /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/impl_.rs /Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config-file.txt /Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config.txt
+
+/Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/deps/libpyo3_build_config-2cdb794bc4f05ed1.rlib: /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/lib.rs /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/errors.rs /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/impl_.rs /Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config-file.txt /Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config.txt
+
+/Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/deps/pyo3_build_config-2cdb794bc4f05ed1.d: /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/lib.rs /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/errors.rs /Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/impl_.rs /Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config-file.txt /Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config.txt
+
+/Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/lib.rs:
+/Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/errors.rs:
+/Users/nemesis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.21.2/src/impl_.rs:
+/Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config-file.txt:
+/Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out/pyo3-build-config.txt:
+
+# env-dep:CARGO_PKG_VERSION=0.21.2
+# env-dep:OUT_DIR=/Users/nemesis/additional-plugins/09_AugmentedPro/rust/target/release/build/pyo3-build-config-632fefcc1673242a/out

@@ -1,0 +1,93 @@
+.PHONY: clean clean-build clean-pyc clean-test install develop test lint format docs benchmark
+
+# Project settings
+PYTHON := python3
+PACKAGE := llamasearch
+TEST_PATH := tests
+DOC_PATH := docs
+
+clean: clean-build clean-pyc clean-test ## Remove all build, test, and coverage artifacts
+
+clean-build: ## Remove build artifacts
+	rm -fr build/
+	rm -fr dist/
+	rm -fr .eggs/
+	find . -name '*.egg-info' -exec rm -fr {} +
+	find . -name '*.egg' -exec rm -f {} +
+
+clean-pyc: ## Remove Python file artifacts
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
+
+clean-test: ## Remove test and coverage artifacts
+	rm -fr .tox/
+	rm -f .coverage
+	rm -fr htmlcov/
+	rm -fr .pytest_cache
+	rm -fr .mypy_cache
+
+install: clean ## Install the package to the active Python's site-packages
+	$(PYTHON) -m pip install .
+
+develop: clean ## Install the package in development mode
+	$(PYTHON) -m pip install -e ".[dev,docs]"
+
+test: ## Run tests with pytest
+	$(PYTHON) -m pytest $(TEST_PATH)
+
+test-cov: ## Run tests with coverage report
+	$(PYTHON) -m pytest --cov=$(PACKAGE) $(TEST_PATH) --cov-report=term-missing
+
+test-property: ## Run property-based tests
+	$(PYTHON) -m pytest $(TEST_PATH)/property -v
+
+test-integration: ## Run integration tests
+	$(PYTHON) -m pytest $(TEST_PATH)/integration -v
+
+lint: ## Run linting checks
+	$(PYTHON) -m black --check $(PACKAGE) $(TEST_PATH)
+	$(PYTHON) -m isort --check-only --profile black $(PACKAGE) $(TEST_PATH)
+	$(PYTHON) -m mypy $(PACKAGE)
+	$(PYTHON) -m flake8 $(PACKAGE) $(TEST_PATH)
+
+format: ## Format code with black and isort
+	$(PYTHON) -m black $(PACKAGE) $(TEST_PATH)
+	$(PYTHON) -m isort --profile black $(PACKAGE) $(TEST_PATH)
+
+docs: ## Generate documentation with MkDocs
+	cd $(DOC_PATH) && $(PYTHON) -m mkdocs build
+
+docs-serve: ## Serve documentation locally
+	cd $(DOC_PATH) && $(PYTHON) -m mkdocs serve
+
+benchmark: ## Run performance benchmarks
+	$(PYTHON) -m pytest $(TEST_PATH)/benchmark -v
+
+benchmark-compare: ## Run and compare benchmarks against previous runs
+	$(PYTHON) -m pytest $(TEST_PATH)/benchmark -v --benchmark-compare
+
+# Add sample data to knowledge base
+load-sample-data: ## Load sample data into the knowledge base
+	mkdir -p knowledge_base
+	test -f knowledge_base/sample.md || echo "# Sample Knowledge\n\nThis is a sample knowledge document for testing purposes.\n\nIt contains multiple paragraphs that can be used for semantic search testing." > knowledge_base/sample.md
+	test -f knowledge_base/neural_networks.md || echo "# Neural Networks\n\nNeural networks are computational systems inspired by the human brain.\n\nThey consist of layers of interconnected nodes (neurons) that process and transform data.\n\nDeep learning uses neural networks with many layers to achieve state-of-the-art results in various domains." > knowledge_base/neural_networks.md
+
+# Run the CLI in development mode
+run: ## Run the CLI in interactive mode
+	$(PYTHON) -m llamasearch.cli ask --visual animated
+
+# Create a source distribution and wheel
+dist: clean ## Create a source distribution and wheel
+	$(PYTHON) -m build
+
+# Run a complete CI check locally
+ci: lint test test-cov ## Run a complete CI check locally
+
+# Help command
+help:
+	@echo "Available commands:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+.DEFAULT_GOAL := help

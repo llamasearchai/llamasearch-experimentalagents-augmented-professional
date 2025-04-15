@@ -1,0 +1,121 @@
+[project]
+name = "llamasearch-experimentalagents-augmented-professional"
+version = "1.0.0"
+description = "AI knowledge democratization engine for professionals"
+authors = [{name = "Nik Jois", email = "nikjois@llamasearch.ai"}]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Framework :: OpenAI",
+    "Framework :: Tauri",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "openai>=1.0.0",
+    "pydantic>=2.6.0",
+    "rich>=13.7.0",
+    "typer>=0.9.0",
+    "numpy>=1.24.0",
+    "sqlite-utils>=3.0",
+    "python-dotenv>=1.0.0",
+    "llm>=0.13",
+    "haystack-ai>=1.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "hypothesis>=6.0.0",
+    "pytest-benchmark>=4.0.0",
+    "tox>=4.0.0",
+    "pre-commit>=3.5.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "maturin>=1.0,<2.0",
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.20.0",
+]
+mlx = [
+    "mlx>=0.1.0",
+]
+jax = [
+    "jax>=0.4.23",
+    "jaxlib>=0.4.23",
+]
+tauri = [
+]
+all = [
+    "llamasearch-experimentalagents-augmented-professional[dev,docs,mlx,jax,tauri]"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/nikjois/llamasearch-experimentalagents-augmented-professional"
+"Bug Tracker" = "https://github.com/nikjois/llamasearch-experimentalagents-augmented-professional/issues"
+"Documentation" = "https://nikjois.github.io/llamasearch-experimentalagents-augmented-professional/"
+
+[project.scripts]
+llamasearch = "llamasearch_experimentalagents_augmented_professional.cli:app"
+
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel>=0.40.0", "maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-ra -q --cov=src/llamasearch_experimentalagents_augmented_professional --cov-report=term-missing"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "benchmark: marks tests as benchmarks",
+    "integration: marks integration tests",
+    "e2e: marks end-to-end tests",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311", "py312"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.ruff]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM", "TID", "ARG", "PTH"]
+ignore = ["E501"]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.isort]
+known-first-party = ["llamasearch_experimentalagents_augmented_professional"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+module-name = "llamasearch_experimentalagents_augmented_professional.rust_accelerator"

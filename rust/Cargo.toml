@@ -1,0 +1,11 @@
+[package]
+name = "llamasearch_experimentalagents_rust"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "llamasearch_experimentalagents_rust_lib" # Avoid conflict with python package name
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.21", features = ["extension-module"] } 
