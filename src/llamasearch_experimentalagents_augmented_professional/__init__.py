@@ -1,30 +1,33 @@
 """
-LlamaSearch ExperimentalAgents Augmented Professional
----------------------------------------------------
+LlamaSearch ExperimentalAgents: AI Knowledge Democratization Engine
 
-Professional AI knowledge democratization engine with hardware-accelerated semantic search,
-engaging llama animations, and structured responses.
+This package provides professional-grade AI-powered knowledge search
+and response generation capabilities.
 """
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info("Initializing LlamaSearch ExperimentalAgents")
+
+# Import public API
+from .agents.agents_assistant import LlamaAssistant
+from .agents.agents_retriever import SemanticRetriever
+from .models.models_knowledge import KnowledgeBase, KnowledgeChunk
+from .models.models_responses import ProfessionalResponse
+from .integrations.knowledge_manager import KnowledgeManager
+
 __version__ = "1.0.0"
-__author__ = "LlamaSearch Team"
-__license__ = "Apache-2.0"
 
-from .models.knowledge import KnowledgeBase, KnowledgeChunk, RunContextWrapper
-from .models.responses import ProfessionalResponse, SourceReference, SuggestedAction
-from .agents.retriever import SemanticRetriever
-from .agents.assistant import LlamaAssistant
-
-# Expose main entry points
 __all__ = [
-    "KnowledgeBase",
-    "KnowledgeChunk",
-    "RunContextWrapper",
+    "LlamaAssistant", 
+    "SemanticRetriever", 
+    "KnowledgeBase", 
+    "KnowledgeChunk", 
     "ProfessionalResponse",
-    "SourceReference",
-    "SuggestedAction",
-    "SemanticRetriever",
-    "LlamaAssistant",
+    "KnowledgeManager",
 ]
 
 # Import CLI for entry point

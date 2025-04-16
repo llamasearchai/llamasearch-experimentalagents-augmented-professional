@@ -9,8 +9,8 @@ import time
 
 from openai import OpenAI
 
-from ..models.knowledge import KnowledgeBase, KnowledgeChunk
-from ..agents.retriever import SemanticRetriever # May consolidate later
+from ..models.models_knowledge import KnowledgeBase, KnowledgeChunk
+from ..agents.agents_retriever import SemanticRetriever  # May consolidate later
 
 logger = logging.getLogger(__name__)
 
